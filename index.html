@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Philobatir Nabil — Portfolio</title>
+<title>Philobatir Nabil · Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -84,6 +84,14 @@
   .name-block .role strong {
     color: var(--accent);
     font-weight: 600;
+  }
+
+  .name-block .bio {
+    margin-top: 12px;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--muted);
+    max-width: 480px;
   }
 
   .contact-block {
@@ -326,6 +334,16 @@
     font-family: 'DM Mono', monospace;
     font-size: 0.7rem;
     color: var(--accent2);
+    margin-bottom: 10px;
+  }
+
+  .exp-card .exp-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.6;
+    border-top: 1px solid var(--border);
+    padding-top: 10px;
+    margin-top: 2px;
   }
 
   /* ── FOOTER ── */
@@ -392,6 +410,26 @@
     opacity: 0.06;
     pointer-events: none;
   }
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .page { padding: 32px 20px 60px; }
+
+    header {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .contact-block { text-align: left; }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+    .card.featured { grid-row: auto; }
+    .card.full { grid-template-columns: 1fr; }
+
+    .exp-grid { grid-template-columns: 1fr; }
+
+    .name-block h1 { font-size: 2.2rem; }
+  }
 </style>
 </head>
 <body>
@@ -404,6 +442,11 @@
       <p class="role">
         Computer & Communications Engineering ·
         <strong>Alexandria National University</strong>
+      </p>
+      <p class="bio">
+        Embedded systems & robotics engineer with hands-on experience building real-time controllers,
+        digital logic hardware, and CPU architectures from scratch.
+        Passionate about low-level systems, autonomous robotics, and teaching the next generation of engineers.
       </p>
     </div>
     <div class="contact-block">
@@ -422,12 +465,12 @@
     <!-- FEATURED -->
     <div class="card featured">
       <div class="card-top-bar"></div>
-      <h3>PD Controller — VEX IQ Robotics</h3>
+      <h3>PD Controller · VEX IQ Robotics</h3>
       <p class="sub">C++ · Real Hardware · Competition Robotics · Private Repo (access on request)</p>
       <p>
         Built a real-time PD (Proportional-Derivative) feedback controller for autonomous navigation
         in VEX IQ competition robotics. Implements gyroscope-based heading correction, pivot and spin
-        turns, and straight driving with live drift compensation — all running at 50 Hz on physical
+        turns, and straight driving with live drift compensation, all running at 50 Hz on physical
         hardware. Includes angle normalization, settled-count debouncing, and velocity clamping for
         robust, repeatable autonomous routines.
       </p>
@@ -458,8 +501,12 @@
       <div class="card-top-bar"></div>
       <h3>Mano-Morris Single-Cycle CPU</h3>
       <p class="sub">Proteus · Computer Architecture</p>
+      <div style="margin: 12px 0; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--border); background: var(--surface2); height: 110px; display:flex; align-items:center; justify-content:center; gap: 12px; color: var(--muted);">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="1"/><line x1="15" y1="4" x2="15" y2="1"/><line x1="9" y1="23" x2="9" y2="20"/><line x1="15" y1="23" x2="15" y2="20"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="15" x2="23" y2="15"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="15" x2="4" y2="15"/></svg>
+        <span style="font-family:'DM Mono',monospace; font-size:0.72rem; letter-spacing:0.06em;">Add Proteus schematic screenshot</span>
+      </div>
       <p>
-        Complete single-cycle CPU designed from scratch in Proteus — ALU, registers, program counter,
+        Complete single-cycle CPU designed from scratch in Proteus, including ALU, registers, program counter,
         control unit, and memory interface. Validates the full fetch-decode-execute pipeline at the gate level.
       </p>
       <div class="tags">
@@ -475,9 +522,13 @@
       <div class="card-top-bar"></div>
       <h3>8-bit Password Security System</h3>
       <p class="sub">Digital Logic · Hardware</p>
+      <div style="margin: 12px 0; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--border); background: var(--surface2); height: 90px; display:flex; align-items:center; justify-content:center; gap: 12px; color: var(--muted);">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/><circle cx="12" cy="16" r="1"/></svg>
+        <span style="font-family:'DM Mono',monospace; font-size:0.72rem; letter-spacing:0.06em;">Add gate-level circuit photo</span>
+      </div>
       <p>
         Hardware password comparator using combinational logic for 8-bit matching with a 3-attempt
-        lockout in sequential logic. Pure gate-level design — no microcontroller abstraction.
+        lockout in sequential logic. Pure gate-level design with no microcontroller abstraction.
       </p>
       <div class="tags">
         <span class="tag">Digital Logic</span>
@@ -515,7 +566,7 @@
     <div class="skills-grid">
       <span class="skill-pill">C / C++</span>
       <span class="skill-pill">Python</span>
-      <span class="skill-pill">Linux — Ubuntu &amp; RHEL</span>
+      <span class="skill-pill">Linux · Ubuntu &amp; RHEL</span>
       <span class="skill-pill">Bash Scripting</span>
       <span class="skill-pill">Microcontrollers</span>
       <span class="skill-pill">PD / PID Control</span>
@@ -534,17 +585,20 @@
       <div class="exp-card">
         <div class="exp-title">Robotics Coach</div>
         <div class="exp-org">Metanoia Planet</div>
-        <div class="exp-year">2023 – Present</div>
+        <div class="exp-year">2023 to Present</div>
+        <div class="exp-desc">Taught programming fundamentals using Scratch and hands-on robotics with LEGO EV3 and WeDo platforms.</div>
       </div>
       <div class="exp-card">
         <div class="exp-title">Robotics Coach</div>
         <div class="exp-org">Eime Continuing Education Center</div>
-        <div class="exp-year">2022 – Present</div>
+        <div class="exp-year">2022 to Present</div>
+        <div class="exp-desc">Designed and delivered a full curriculum for LEGO Spike robotics, covering mechanics, sensors, and autonomous programming.</div>
       </div>
       <div class="exp-card">
         <div class="exp-title">Robotics Coach</div>
         <div class="exp-org">M&amp;P Robotix</div>
-        <div class="exp-year">2024 – Present</div>
+        <div class="exp-year">2024 to Present</div>
+        <div class="exp-desc">Mentoring competitive VEX IQ teams in programming, PD control systems, and competition strategy.</div>
       </div>
     </div>
   </div>
@@ -558,30 +612,6 @@
 </div>
 
 
-<!-- Decorative SVG -->
-<svg class="corner-deco" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="50" cy="50" r="48" stroke="#7C3D12" stroke-width="1"/>
-  <circle cx="50" cy="50" r="36" stroke="#7C3D12" stroke-width="0.5"/>
-  <circle cx="50" cy="50" r="24" stroke="#7C3D12" stroke-width="0.5"/>
-  <line x1="2" y1="50" x2="98" y2="50" stroke="#7C3D12" stroke-width="0.5"/>
-  <line x1="50" y1="2" x2="50" y2="98" stroke="#7C3D12" stroke-width="0.5"/>
-</svg>
-<!-- Decorative SVG -->
-<svg class="corner-deco" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="50" cy="50" r="48" stroke="#7C3D12" stroke-width="1"/>
-  <circle cx="50" cy="50" r="36" stroke="#7C3D12" stroke-width="0.5"/>
-  <circle cx="50" cy="50" r="24" stroke="#7C3D12" stroke-width="0.5"/>
-  <line x1="2" y1="50" x2="98" y2="50" stroke="#7C3D12" stroke-width="0.5"/>
-  <line x1="50" y1="2" x2="50" y2="98" stroke="#7C3D12" stroke-width="0.5"/>
-</svg>
-<!-- Decorative SVG -->
-<svg class="corner-deco" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="50" cy="50" r="48" stroke="#7C3D12" stroke-width="1"/>
-  <circle cx="50" cy="50" r="36" stroke="#7C3D12" stroke-width="0.5"/>
-  <circle cx="50" cy="50" r="24" stroke="#7C3D12" stroke-width="0.5"/>
-  <line x1="2" y1="50" x2="98" y2="50" stroke="#7C3D12" stroke-width="0.5"/>
-  <line x1="50" y1="2" x2="50" y2="98" stroke="#7C3D12" stroke-width="0.5"/>
-</svg>
 <!-- Decorative SVG -->
 <svg class="corner-deco" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
   <circle cx="50" cy="50" r="48" stroke="#7C3D12" stroke-width="1"/>
