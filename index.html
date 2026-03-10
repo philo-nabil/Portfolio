@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Philobatir Nabil — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #F7F2E9;
+    --surface:  #FDFAF3;
+    --surface2: #F0EAD8;
+    --border:   #DDD4C0;
+    --accent:   #7C3D12;
+    --accent2:  #B8622A;
+    --gold:     #C9953A;
+    --text:     #251408;
+    --muted:    #7A6450;
+    --light:    #A8957E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 56px 40px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HEADER ── */
+  header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: end;
+    padding-bottom: 36px;
+    border-bottom: 1.5px solid var(--border);
+    margin-bottom: 48px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .name-block h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+
+  .name-block h1 span {
+    color: var(--accent2);
+  }
+
+  .name-block .role {
+    margin-top: 8px;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .name-block .role strong {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .contact-block {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .contact-block a, .contact-block span {
+    font-size: 0.82rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    transition: color 0.2s;
+    display: block;
+  }
+
+  .contact-block a:hover { color: var(--accent2); }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .section-label h2 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── PROJECTS GRID ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(124,61,18,0.10);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,149,58,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Featured card */
+  .card.featured {
+    grid-row: 1 / 3;
+    border-color: var(--accent2);
+  }
+
+  .card.featured::after {
+    content: '★ FEATURED';
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--surface);
+    background: var(--accent2);
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  .card-top-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    border-radius: 16px 16px 0 0;
+  }
+
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+    padding-right: 80px;
+    line-height: 1.3;
+  }
+
+  .card.featured h3 {
+    font-size: 1.35rem;
+    padding-right: 90px;
+  }
+
+  .card .sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent2);
+    margin-bottom: 12px;
+    letter-spacing: 0.04em;
+  }
+
+  .card p {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .card.featured p { font-size: 0.92rem; }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: var(--accent);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.02em;
+  }
+
+  /* Full-width card */
+  .card.full {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .card.full .card-right { display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
+
+  /* ── SKILLS ── */
+  .skills-section {
+    margin-bottom: 48px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .skill-pill {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text);
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    padding: 6px 16px;
+    border-radius: 100px;
+    transition: all 0.2s ease;
+    cursor: default;
+  }
+
+  .skill-pill:hover {
+    background: var(--accent);
+    color: var(--surface);
+    border-color: var(--accent);
+  }
+
+  /* ── EXPERIENCE ── */
+  .experience-section {
+    margin-bottom: 48px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .exp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  .exp-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .exp-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(124,61,18,0.08);
+  }
+
+  .exp-card .exp-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .exp-card .exp-org {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .exp-card .exp-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent2);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1.5px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  footer p {
+    font-size: 0.78rem;
+    color: var(--light);
+    font-family: 'DM Mono', monospace;
+  }
+
+  .open-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent2);
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    padding: 5px 14px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .open-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4CAF50;
+    display: inline-block;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.12s; }
+  .card:nth-child(3) { animation-delay: 0.18s; }
+  .card:nth-child(4) { animation-delay: 0.24s; }
+
+  /* ── DECORATIVE CORNER ── */
+  .corner-deco {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 120px;
+    height: 120px;
+    opacity: 0.06;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div class="name-block">
+      <h1>Philobatir<br><span>Nabil</span></h1>
+      <p class="role">
+        Computer & Communications Engineering ·
+        <strong>Alexandria National University</strong>
+      </p>
+    </div>
+    <div class="contact-block">
+      <a href="https://github.com/philo-nabil">github.com/philo-nabil</a>
+      <a href="https://linkedin.com/in/philobatir-nabil">linkedin.com/in/philobatir-nabil</a>
+
+      <span>Egypt · Open to Relocation</span>
+    </div>
+  </header>
+
+  <!-- PROJECTS -->
+  <div class="section-label"><h2>Projects</h2></div>
+
+  <div class="projects-grid">
+
+    <!-- FEATURED -->
+    <div class="card featured">
+      <div class="card-top-bar"></div>
+      <h3>PD Controller — VEX IQ Robotics</h3>
+      <p class="sub">C++ · Real Hardware · Competition Robotics · Private Repo (access on request)</p>
+      <p>
+        Built a real-time PD (Proportional-Derivative) feedback controller for autonomous navigation
+        in VEX IQ competition robotics. Implements gyroscope-based heading correction, pivot and spin
+        turns, and straight driving with live drift compensation — all running at 50 Hz on physical
+        hardware. Includes angle normalization, settled-count debouncing, and velocity clamping for
+        robust, repeatable autonomous routines.
+      </p>
+      <a href="https://youtu.be/7stJgtYao6I" target="_blank" style="display:block; margin: 14px 0; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--border); position: relative; text-decoration: none;">
+        <img src="https://img.youtube.com/vi/7stJgtYao6I/hqdefault.jpg" alt="VEX IQ PD Controller Demo" style="width:100%; display:block;">
+        <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(37,20,8,0.35); transition: background 0.2s;"
+             onmouseover="this.style.background='rgba(37,20,8,0.5)'"
+             onmouseout="this.style.background='rgba(37,20,8,0.35)'">
+          <div style="width:54px; height:54px; background:var(--accent2); border-radius:50%; display:flex; align-items:center; justify-content:center;">
+            <div style="width:0; height:0; border-top:10px solid transparent; border-bottom:10px solid transparent; border-left:18px solid white; margin-left:4px;"></div>
+          </div>
+        </div>
+        <div style="position:absolute; bottom:10px; left:12px; font-family:'DM Mono',monospace; font-size:0.68rem; color:white; letter-spacing:0.05em; opacity:0.9;">▶ Watch Demo</div>
+      </a>
+      <div class="tags">
+        <span class="tag">C++</span>
+        <span class="tag">PD Control</span>
+        <span class="tag">Gyroscope</span>
+        <span class="tag">Real Hardware</span>
+        <span class="tag">Autonomous</span>
+        <span class="tag">Embedded · 50Hz Loop</span>
+        <span class="tag">VEXcode IQ</span>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="card">
+      <div class="card-top-bar"></div>
+      <h3>Mano-Morris Single-Cycle CPU</h3>
+      <p class="sub">Proteus · Computer Architecture</p>
+      <p>
+        Complete single-cycle CPU designed from scratch in Proteus — ALU, registers, program counter,
+        control unit, and memory interface. Validates the full fetch-decode-execute pipeline at the gate level.
+      </p>
+      <div class="tags">
+        <span class="tag">CPU Design</span>
+        <span class="tag">ALU</span>
+        <span class="tag">Proteus</span>
+        <span class="tag">Architecture</span>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="card">
+      <div class="card-top-bar"></div>
+      <h3>8-bit Password Security System</h3>
+      <p class="sub">Digital Logic · Hardware</p>
+      <p>
+        Hardware password comparator using combinational logic for 8-bit matching with a 3-attempt
+        lockout in sequential logic. Pure gate-level design — no microcontroller abstraction.
+      </p>
+      <div class="tags">
+        <span class="tag">Digital Logic</span>
+        <span class="tag">Combinational</span>
+        <span class="tag">Sequential</span>
+      </div>
+    </div>
+
+    <!-- CARD 4 — full width -->
+    <div class="card full">
+      <div class="card-top-bar"></div>
+      <div>
+        <h3>Digital Clock &amp; Countdown Timer</h3>
+        <p class="sub">Counter ICs · Hardware</p>
+        <p>
+          Counter-based clock and timer with start, stop, and reset controls.
+          BCD-to-7-segment display driving with synchronous counter design and hardware state machine.
+        </p>
+      </div>
+      <div class="card-right">
+        <div class="tags">
+          <span class="tag">Counters</span>
+          <span class="tag">BCD</span>
+          <span class="tag">7-Segment</span>
+            <span class="tag">Timing</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SKILLS -->
+  <div class="skills-section">
+    <div class="section-label"><h2>Skills &amp; Tools</h2></div>
+    <div class="skills-grid">
+      <span class="skill-pill">C / C++</span>
+      <span class="skill-pill">Python</span>
+      <span class="skill-pill">Linux — Ubuntu &amp; RHEL</span>
+      <span class="skill-pill">Bash Scripting</span>
+      <span class="skill-pill">Microcontrollers</span>
+      <span class="skill-pill">PD / PID Control</span>
+      <span class="skill-pill">Digital Logic</span>
+      <span class="skill-pill">Proteus</span>
+      <span class="skill-pill">MATLAB</span>
+      <span class="skill-pill">Git / GitHub</span>
+      <span class="skill-pill">Computer Architecture</span>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="experience-section">
+    <div class="section-label"><h2>Experience</h2></div>
+    <div class="exp-grid">
+      <div class="exp-card">
+        <div class="exp-title">Robotics Coach</div>
+        <div class="exp-org">Metanoia Planet</div>
+        <div class="exp-year">2023 – Present</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-title">Robotics Coach</div>
+        <div class="exp-org">Eime Continuing Education Center</div>
+        <div class="exp-year">2022 – Present</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-title">Robotics Coach</div>
+        <div class="exp-org">M&amp;P Robotix</div>
+        <div class="exp-year">2024 – Present</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Embedded Systems Engineering Portfolio · 2025</p>
+    <div class="open-badge">Open to Relocation · Visa Sponsorship Welcome</div>
+  </footer>
+
+</div>
+
+
+<!-- Decorative SVG -->
+<svg class="corner-deco" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="48" stroke="#7C3D12" stroke-width="1"/>
+  <circle cx="50" cy="50" r="36" stroke="#7C3D12" stroke-width="0.5"/>
+  <circle cx="50" cy="50" r="24" stroke="#7C3D12" stroke-width="0.5"/>
+  <line x1="2" y1="50" x2="98" y2="50" stroke="#7C3D12" stroke-width="0.5"/>
+  <line x1="50" y1="2" x2="50" y2="98" stroke="#7C3D12" stroke-width="0.5"/>
+</svg>
+<!-- Decorative SVG -->
+<svg class="corner-deco" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="48" stroke="#7C3D12" stroke-width="1"/>
+  <circle cx="50" cy="50" r="36" stroke="#7C3D12" stroke-width="0.5"/>
+  <circle cx="50" cy="50" r="24" stroke="#7C3D12" stroke-width="0.5"/>
+  <line x1="2" y1="50" x2="98" y2="50" stroke="#7C3D12" stroke-width="0.5"/>
+  <line x1="50" y1="2" x2="50" y2="98" stroke="#7C3D12" stroke-width="0.5"/>
+</svg>
+<!-- Decorative SVG -->
+<svg class="corner-deco" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="48" stroke="#7C3D12" stroke-width="1"/>
+  <circle cx="50" cy="50" r="36" stroke="#7C3D12" stroke-width="0.5"/>
+  <circle cx="50" cy="50" r="24" stroke="#7C3D12" stroke-width="0.5"/>
+  <line x1="2" y1="50" x2="98" y2="50" stroke="#7C3D12" stroke-width="0.5"/>
+  <line x1="50" y1="2" x2="50" y2="98" stroke="#7C3D12" stroke-width="0.5"/>
+</svg>
+<!-- Decorative SVG -->
+<svg class="corner-deco" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="48" stroke="#7C3D12" stroke-width="1"/>
+  <circle cx="50" cy="50" r="36" stroke="#7C3D12" stroke-width="0.5"/>
+  <circle cx="50" cy="50" r="24" stroke="#7C3D12" stroke-width="0.5"/>
+  <line x1="2" y1="50" x2="98" y2="50" stroke="#7C3D12" stroke-width="0.5"/>
+  <line x1="50" y1="2" x2="50" y2="98" stroke="#7C3D12" stroke-width="0.5"/>
+</svg>
+</body>
+</html>
